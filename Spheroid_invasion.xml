@@ -1,0 +1,93 @@
+<CompuCell3D Revision="20190811" Version="4.0.0">
+   
+   <Metadata>
+      
+      <!-- Basic properties simulation -->
+      <NumberOfProcessors>2</NumberOfProcessors>
+      <DebugOutputFrequency>200</DebugOutputFrequency>
+      <!-- <NonParallelModule Name="Potts"/> -->
+   </Metadata>
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="400" y="90" z="90"/>
+      <Steps>2001</Steps>
+      <Temperature>20.0</Temperature>
+      <NeighborOrder>2</NeighborOrder>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType TypeId="1" TypeName="FOLLOWER"/>
+      <CellType TypeId="2" TypeName="LEADER"/>
+   </Plugin>
+   
+   <Plugin Name="Volume">
+<!--       <VolumeEnergyParameters CellType="KP" LambdaVolume="2.0" TargetVolume="50"/> -->
+<!--       <VolumeEnergyParameters CellType="KN" LambdaVolume="2.0" TargetVolume="50"/> -->
+   </Plugin>
+   
+   <Plugin Name="Surface">
+
+</Plugin>
+
+
+<Plugin Name="Contact">
+   <!-- Specification of adhesion energies -->
+   <Energy Type1="Medium" Type2="Medium">10</Energy>
+
+   <Energy Type1="Medium" Type2="FOLLOWER">5</Energy>
+   <Energy Type1="Medium" Type2="LEADER">{{JLE}}</Energy>
+
+   <Energy Type1="FOLLOWER" Type2="FOLLOWER">{{JFF}}</Energy>
+   <Energy Type1="LEADER" Type2="LEADER">{{JLL}}</Energy>
+
+   <Energy Type1="FOLLOWER" Type2="LEADER">{{JLF}}</Energy> 
+   <NeighborOrder>4</NeighborOrder>
+</Plugin>
+
+<Plugin Name="ExternalPotential">
+   
+   <!-- External force applied to cell. Each cell type has different force. -->
+   <!-- For more flexible specification of the constraint (done in Python) please use ExternalPotentialLocalFlex plugin -->
+   <!-- Algorithm options are: PixelBased, CenterOfMassBased -->
+   <Algorithm>PixelBased</Algorithm>
+   
+</Plugin>
+
+<Plugin Name="NeighborTracker">
+   
+   <!-- Module tracking neighboring cells of each cell -->
+</Plugin>
+
+<Plugin Name="CenterOfMass">
+   
+   <!-- Module tracking center of mass of each cell -->
+</Plugin>
+
+   
+   <Steppable Type="BoxWatcher">
+      
+      <!-- Module tracing boundaries of the minimal box enclosing all the cells. May speed up calculations. May have no effect for parallel version -->
+      <XMargin>3</XMargin>
+      <YMargin>3</YMargin>
+      <ZMargin>3</ZMargin>
+   </Steppable>
+   
+<Steppable Type="BlobInitializer">
+   
+   <!-- Initial layout of cells in the f orm of spherical (circular in 2D) blob -->
+   <Region>
+      <Center x="41" y="45" z="45"/>
+      <Radius>40</Radius>
+      <Gap>0</Gap>
+      <Width>5</Width>
+      <Types>FOLLOWER,LEADER</Types>
+   </Region>
+</Steppable>
+
+
+</CompuCell3D>

@@ -1,0 +1,6 @@
+<Simulation version="4.0.0">
+   <XMLScript Type="XMLScript">Simulation/Spheroid_invasion.xml</XMLScript>
+   <PythonScript Type="PythonScript">Simulation/Spheroid_invasion.py</PythonScript>
+   <Resource Type="Python">Simulation/Spheroid_invasionSteppables.py</Resource>
+   <ParameterScan Type="ParameterScan">Simulation/ParameterScanSpecs.json</ParameterScan>
+</Simulation>

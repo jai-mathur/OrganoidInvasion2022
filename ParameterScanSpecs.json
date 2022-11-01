@@ -1,0 +1,27 @@
+{
+    "version":"4.2.3",
+    "parameter_list":{
+        "P0":{            
+            "values":[20]
+        },
+        "JLF":{            
+            "values":[1]
+        },
+        "JLL":{            
+            "values":[5]
+        },
+        "JFF":{            
+            "values":[1]
+        },
+        "JLE":{            
+            "values":[1]
+        },
+        "f_R":{            
+            "values":[5]
+        },
+        "PL":{            
+            "values":[20]
+        
+        }
+    }
+}
